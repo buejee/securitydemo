@@ -4,8 +4,35 @@
 		<meta charset="UTF-8">
 		<title>admin</title>
 		<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<script type="text/javascript" src="js/libs/react.development.js"></script>
+		<script type="text/javascript" src="js/libs/react-dom.development.js"></script>
+		<script type="text/javascript" src="js/libs/babel.min.js"></script>
 	</head>
 	<body>
-		<h2>hello,welcome to security page.<span sec:authorize="isAuthenticated()"><a th:href="@{/user/logout}">logout</a></span></h2>
+		<h2>hello,welcome to security page.
+			<span sec:authorize="isAuthenticated()">
+				<a th:href="@{/user/logout}">logout</a>
+			</span>
+		</h2>
+		<div id="root"></div>
 	</body>
+	<script type="text/jsx">
+		class MyDocument extends React.Component{
+			handleClick(){
+				this.refs.myInput.focus();
+			}
+			render(){
+				return (
+				  <div>
+					  <input type="text" ref="myInput"/>
+					  <input type="button" value="OK" onClick={this.handleClick.bind(this)} />
+				  </div>
+				);
+			}
+		}
+		ReactDOM.render(
+			<MyDocument/>,
+			document.getElementById("root")
+		);
+	</script>
 </html>
